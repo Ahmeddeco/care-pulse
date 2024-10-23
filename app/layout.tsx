@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
 import './globals.css'
+import { cn } from '@/lib/utils'
+import { ThemeProvider } from '@/components/theme-provider'
 
 const plusjakart = localFont({
 	src: './fonts/PlusJakartaSans-VariableFont_wght.ttf',
@@ -19,7 +21,16 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang='en'>
-			<body className={`${plusjakart.variable} antialiased`}>{children}</body>
+			<body
+				className={cn(
+					'min-h-screen bg-dark-300 font-plusjakart antialiased',
+					plusjakart.variable
+				)}
+			>
+				<ThemeProvider attribute='class' defaultTheme='dark'>
+					{children}
+				</ThemeProvider>
+			</body>
 		</html>
 	)
 }
