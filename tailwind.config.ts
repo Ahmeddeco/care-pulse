@@ -47,7 +47,7 @@ const config = {
         },
       },
       fontFamily: {
-        sans: ["var(--font-sans)", ...fontFamily.sans],
+        plusjakart: ["var(--font-plusjakart-sans)"],
       },
       backgroundImage: {
         appointments: "url('/assets/images/appointments-bg.png')",

@@ -15,7 +15,9 @@ import { FormFieldType } from './forms/PatientForm'
 import { ReactNode } from 'react'
 import Image from 'next/image'
 import 'react-phone-number-input/style.css'
-import PhoneInput  from 'react-phone-number-input'
+import PhoneInput from 'react-phone-number-input'
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
 
 /* ------------------------------- CustomProps ------------------------------ */
 interface CustomProps {
@@ -82,12 +84,36 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
 						placeholder={placeholder}
 						international
 						withCountryCallingCode
-						value={field.value }
+						value={field.value}
 						onChange={field.onChange}
 						className='input-phone'
 					/>
 				</FormControl>
 			)
+		case FormFieldType.DATE_PICKER:
+			return (
+				<div className='flex rounded-md border border-dark-500 bg-dark-400 '>
+					<Image
+						src={'/assets/icons/calendar.svg'}
+						alt={'calendar'}
+						width={24}
+						height={24}
+						className='ml-2'
+					/>
+					<FormControl>
+						<DatePicker
+							selected={field.value}
+							onChange={(date) => field.onChange(date)}
+							dateFormat={dateFormat ?? 'dd/MM/yyyy'}
+							showTimeSelect={showTimeSelect ?? false}
+							timeInputLabel='Time:'
+							wrapperClassName='date-picker'
+						/>
+					</FormControl>
+				</div>
+			)
+		case FormFieldType.SKELETON:
+			return renderSkeleton ? renderSkeleton(field) : null
 		default:
 			break
 	}
